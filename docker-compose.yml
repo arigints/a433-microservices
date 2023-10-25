@@ -1,0 +1,17 @@
+services: #membuat services
+  item-app: #service bernama item-app
+    image: ghcr.io/arigints/item-app:v1 #menggunakan image dari Github Packages
+    ports: #mendefiiniskan port
+      - "80:8080" #ekspos port 8080 pada container dan 80 pada host
+    depends_on: #ketergantungan dengan container lain
+      - item-db #item-app hanya berjalan setelah item-db diluncurkan
+    restart: always  #container selalu restart ketika terhenti
+
+  item-db: #service bernama item-db
+    image: mongo:3 #menggunakan image mongo dengan versi 3
+    volumes: #mendefinisikan volume
+      - app-db:/data/db #memakai volume bernama ssapp-db dengan target /data/db di container
+    restart: always  ##container selalu restart ketika terhenti
+
+volumes: #mendefinisikan volume
+  app-db: #memiliki satu buah volume bernama app-db
