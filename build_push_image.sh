@@ -8,7 +8,7 @@ docker images
 docker tag item-app:v1 ghcr.io/arigints/item-app:v1
 
 #login ke Github Packages
-docker login
+echo $GITHUB_TOKEN | docker login ghcr.io -u arigints --password-stdin
 
 #push image ke Github Packages
 docker push ghcr.io/arigints/item-app:v1
